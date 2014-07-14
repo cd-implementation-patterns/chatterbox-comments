@@ -6,14 +6,16 @@ gem 'sinatra-activerecord', '~> 2.0.2', require: "sinatra/activerecord"
 gem 'activerecord', '~> 4.1.4'
 gem 'pg', '~> 0.17.1'
 
+gem 'fpm', '~> 1.1.0', group: :packaging
+
 group :development, :test do
   gem 'rspec', '~> 3.0.0'
-  gem 'pry'
-  gem 'pry-byebug'
 end
 
 group :development do
   gem 'tux'
+  gem 'pry'
+  gem 'pry-byebug'
 end
 
 group :test do
