@@ -4,17 +4,16 @@ gem 'rake'
 gem 'sinatra', '~> 1.4.5'
 gem 'sinatra-activerecord', '~> 2.0.2', require: "sinatra/activerecord"
 gem 'activerecord', '~> 4.1.4'
+gem 'pg', '~> 0.17.1'
 
 group :development, :test do
-  #gem 'sqlite3', '~> 1.3.9'
-  gem 'pg', '~> 0.17.1'
   gem 'rspec', '~> 3.0.0'
   gem 'pry'
   gem 'pry-byebug'
 end
 
 group :development do
-#  gem 'tux'
+  gem 'tux'
 end
 
 group :test do
