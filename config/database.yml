@@ -1,0 +1,12 @@
+default: &defaults
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+
+development:
+  <<: *defaults
+  database: comments_service_dev
+
+test:
+  <<: *defaults
+  database: comments_service_test
