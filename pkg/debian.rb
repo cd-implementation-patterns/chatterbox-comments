@@ -7,7 +7,6 @@ Bundler.require(:packaging)
 
 # bundle install --deployment
 
-require 'pry'; binding.pry
 source = FPM::Package::Dir.new
 
 source.attributes[:prefix] = "/chatterbox/srv/comments/"
@@ -19,6 +18,11 @@ source.input('./app.rb')
 source.input('./config.ru')
 source.input('./Rakefile')
 
+source.input('./Gemfile')
+source.input('./Gemfile.lock')
+source.input('./.bundle')
+source.input('./vendor')
+
 #source.input('./pkg/default')
 
 package = source.convert(FPM::Package::Deb)
@@ -28,13 +32,17 @@ package.version = "0.0"
 package.url = "https://github.com/cd-implementation-patterns"
 package.vendor = "Reinaldo Jr"
 package.maintainer = "Reinaldo Jr"
-package.architecture = "ruby"
+package.architecture = "all"
 
 package.attributes[:deb_default_list] = ['./pkg/default/chatterbox-comments']
 
 #package.provides = ""
 #package.config_files << 
-#package.dependencies << 
+package.dependencies << "libpq-dev >= 9.1.0"
+
+# upstart
+# --after-install
+# bundle exec foreman export upstart /etc/init/ -a chatterbox-comments
 
 #package.attributes[:deb_init_list] FILEPATH     Add FILEPATH as an init script
 #package.attributes[:deb_default_list] FILEPATH  Add FILEPATH as /etc/default configuration

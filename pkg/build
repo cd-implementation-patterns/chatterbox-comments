@@ -2,9 +2,26 @@
 
 set -xeu
 
-ROOT_PATH="$(dirname "$0")../"
+ROOT_PATH="$(dirname "$0")/../"
 
 pushd $ROOT_PATH
-bundle install --deployment
+
+# cleanup
+rm -f pkg/*.deb
+rm -rf .bundle/
+
+# Native extensions are going to be built for my current architecture (mac)
+bundle install --standalone --deployment --without development test
+
+# rm -rf vendor/bundle/ruby/2.1.0/cache/
+
+# foreman export upstart ./pkg/upstart/
+# foreman export inittab ./pkg/
+
+bundle exec ruby pkg/debian.rb
+
+echo "Done!"
+
+dpkg --contents pkg/*.deb
 
 popd

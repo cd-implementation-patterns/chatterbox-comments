@@ -1,4 +1,5 @@
 source 'https://rubygems.org'
+ruby '2.1.2'
 
 gem 'rake'
 gem 'sinatra', '~> 1.4.5'
@@ -6,7 +7,10 @@ gem 'sinatra-activerecord', '~> 2.0.2', require: "sinatra/activerecord"
 gem 'activerecord', '~> 4.1.4'
 gem 'pg', '~> 0.17.1'
 
-gem 'fpm', '~> 1.1.0', group: :packaging
+group :packaging do
+  gem 'foreman'
+  gem 'fpm', '~> 1.1.0'
+end
 
 group :development, :test do
   gem 'rspec', '~> 3.0.0'
